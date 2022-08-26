@@ -4,10 +4,12 @@ const btnUp = document.querySelector('#up');
 const btnLeft = document.querySelector('#left');
 const btnRight = document.querySelector('#right');
 const btnDown = document.querySelector('#down');
+const btnRestart = document.querySelector('#restart');
 const spanLives = document.querySelector('#lives');
 const spanTime = document.querySelector('#time');
 const spanRecord = document.querySelector('#record');
 const pResult = document.querySelector('#result');
+
 
 let canvasSize;
 let elementsSize;
@@ -191,6 +193,7 @@ btnUp.addEventListener('click', moveUp);
 btnLeft.addEventListener('click', moveLeft);
 btnRight.addEventListener('click', moveRight);
 btnDown.addEventListener('click', moveDown);
+btnRestart.addEventListener('click', reiniciarJuego);
 
 function moveByKeys(event) {
   if (event.key == 'ArrowUp') moveUp();
@@ -238,3 +241,14 @@ function moveDown() {
     startGame();
   }
 }
+
+function reiniciarJuego() {
+    level=0;
+    lives=3;
+    clearInterval( timeInterval )
+    timeStart = undefined
+    playerTime = undefined
+    playerPosition.x = undefined
+    playerPosition.y = undefined
+    startGame();
+  }
