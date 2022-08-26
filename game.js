@@ -31,17 +31,20 @@ let enemyPositions = [];
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
 
+
 function setCanvasSize() {
   if (window.innerHeight > window.innerWidth) {
-    canvasSize = window.innerWidth * 0.8;
+    canvasSize = window.innerWidth * 0.7;
   } else {
-    canvasSize = window.innerHeight * 0.8;
-  }
-  
+    canvasSize = window.innerHeight * 0.7;
+  } 
+
+  canvasSize = Number(canvasSize.toFixed(0));
+
   canvas.setAttribute('width', canvasSize);
   canvas.setAttribute('height', canvasSize);
   
-  elementsSize = canvasSize / 10;
+  elementsSize = Number((canvasSize / 10).toFixed(0));
 
   startGame();
 }
@@ -156,20 +159,20 @@ function gameWin() {
   if (recordTime) {
     if (recordTime >= playerTime) {
       localStorage.setItem('record_time', playerTime);
-      pResult.innerHTML = 'SUPERASTE EL RECORD :)';
+      pResult.innerHTML = 'SUPERASTE EL RECORD 🎆';
     } else {
-      pResult.innerHTML = 'lo siento, no superaste el records :(';
+      pResult.innerHTML = 'lo siento, no superaste el records😓';
     }
   } else {
     localStorage.setItem('record_time', playerTime);
-    pResult.innerHTML = 'Primera vez? Muy bien, pero ahora trata de superar tu tiempo :)';
+    pResult.innerHTML = 'Primera vez? Muy bien, pero ahora trata de superar tu tiempo🎆';
   }
 
   console.log({recordTime, playerTime});
 }
 
 function showLives() {
-  const heartsArray = Array(lives).fill(emojis['HEART']); // [1,2,3]
+  const heartsArray = Array(lives).fill(emojis['HEART']); 
   
   spanLives.innerHTML = "";
   heartsArray.forEach(heart => spanLives.append(heart));
