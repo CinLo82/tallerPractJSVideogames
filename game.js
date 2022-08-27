@@ -9,7 +9,10 @@ const spanLives = document.querySelector('#lives');
 const spanTime = document.querySelector('#time');
 const spanRecord = document.querySelector('#record');
 const pResult = document.querySelector('#result');
-
+const newGameBtn = document.querySelector("#newGameButtonModal");
+const puntajeSpanModal = document.querySelector("#puntajeSpanModal");
+const divMens = document.querySelector('.container-mens');
+divMens.style.display = 'none';
 
 let canvasSize;
 let elementsSize;
@@ -19,6 +22,7 @@ let lives = 3;
 let timeStart;
 let timePlayer;
 let timeInterval;
+let timeTimeout;
 
 const playerPosition = {
   x: undefined,
@@ -108,6 +112,10 @@ function startGame() {
   movePlayer();
 }
 
+
+newGameBtn.addEventListener('click',reiniciarJuego);
+
+
 function movePlayer() {
   const giftCollisionX = playerPosition.x.toFixed(3) == giftPosition.x.toFixed(3);
   const giftCollisionY = playerPosition.y.toFixed(3) == giftPosition.y.toFixed(3);
@@ -155,6 +163,7 @@ function gameWin() {
   console.log('¡Terminaste el juego!');
   clearInterval(timeInterval);
 
+
   const recordTime = localStorage.getItem('record_time');
   const playerTime = Date.now() - timeStart;
 
@@ -171,6 +180,8 @@ function gameWin() {
   }
 
   console.log({recordTime, playerTime});
+  divMens.style.display = 'flex';
+ 
 }
 
 function showLives() {
@@ -182,11 +193,13 @@ function showLives() {
 
 function showTime() {
   spanTime.innerHTML = Date.now() - timeStart;
+  puntajeSpanModal.innerHTML = Date.now() - timeStart;
 }
 
 function showRecord() {
   spanRecord.innerHTML = localStorage.getItem('record_time');
 }
+
 
 window.addEventListener('keydown', moveByKeys);
 btnUp.addEventListener('click', moveUp);
@@ -251,4 +264,5 @@ function reiniciarJuego() {
     playerPosition.x = undefined
     playerPosition.y = undefined
     startGame();
+    divMens.style.display = 'none';
   }
